@@ -6,6 +6,7 @@ BLOCKSIZE = 65536
 def hash_files(root, fast):
     files = [os.path.join(dp, f) for dp, dn, fn in os.walk(root) for f in fn]
     for f in files:
+        print("Reading ", f)
         try:
             hasher = hashlib.md5()
             with open(f, 'rb') as current_file:
@@ -13,7 +14,6 @@ def hash_files(root, fast):
                     buff = current_file.read(BLOCKSIZE)
                     hasher.update(buff)
                 else:
-                    print("Reading ", f)
                     block = 1
                     buff = current_file.read(BLOCKSIZE)
                     while len(buff) > 0:

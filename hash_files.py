@@ -25,8 +25,10 @@ def hash_files(root, fast):
                 h.write("{0} - {1}\r\n".format(f, hasher.hexdigest()).encode(encoding='utf_8', errors='replace'))
             print("\r", hasher.hexdigest())
         except PermissionError:
+            print("Permission denied!")
             continue
         except FileNotFoundError:
+            print("File not found!")
             continue
 if len(sys.argv) > 2:
     if sys.argv[1] == "-f": # Fast Mode

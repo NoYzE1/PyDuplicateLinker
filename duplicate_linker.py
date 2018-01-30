@@ -11,17 +11,18 @@ def link_duplicates():
     for i in range(len(hashmap)):
         for j in range(i+1, len(hashmap)):
             if hashmap[i][1] == hashmap[j][1]:
-                print("Duplicate found! ", hashmap[i][0], hashmap[j][0])
-                print("Deleting duplicate...", end="")
-                try:
-                    os.remove(hashmap[j][0])
-                    print("Linking...", end="")
-                    os.link(hashmap[i][0], hashmap[j][0])
-                    print("OK.")
-                except FileNotFoundError:
-                    print("File not found!")
-                except PermissionError:
-                    print("No permission!")
-                except OSError:
-                    print("OS Error!")
+                if os.stat(hashmap[i][0]).st_ino != os.stat(hashmap[j][0]).st_ino:
+                    print("Duplicate found! ", hashmap[i][0], hashmap[j][0])
+                    print("Deleting duplicate...", end="")
+                    try:
+                        os.remove(hashmap[j][0])
+                        print("Linking...", end="")
+                        os.link(hashmap[i][0], hashmap[j][0])
+                        print("OK.")
+                    except FileNotFoundError:
+                        print("File not found!")
+                    except PermissionError:
+                        print("No permission!")
+                    except OSError:
+                        print("OS Error!")
 link_duplicates()

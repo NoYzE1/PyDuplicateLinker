@@ -30,6 +30,8 @@ def hash_files(root, fast):
         except FileNotFoundError:
             print(" File not found!")
             continue
+        except OSError:
+            print(" OS Error! skipping...")
 if len(sys.argv) > 2:
     if sys.argv[1] == "-f": # Fast Mode
         hash_files(sys.argv[1].lstrip('"').rstrip('"'), True)

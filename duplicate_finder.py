@@ -12,5 +12,5 @@ def find_duplicates():
         for j in range(i+1, len(hashmap)):
             if hashmap[i][1] == hashmap[j][1]:
                 if os.stat(hashmap[i][0]).st_ino != os.stat(hashmap[j][0]).st_ino:
-                    print("Duplicate found! ", hashmap[i][0], hashmap[j][0])
+                    print("Duplicate found! ", hashmap[i][0], "=", hashmap[j][0])
 find_duplicates()
